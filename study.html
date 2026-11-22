@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lamar — History of Information Technology Study Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-grad-1: #0b1020;
+      --bg-grad-2: #131c38;
+      --bg-accent-1: rgba(56, 189, 248, 0.16);
+      --bg-accent-2: rgba(139, 92, 246, 0.16);
+      --glass-bg: rgba(20, 29, 54, 0.72);
+      --glass-elevated: rgba(30, 42, 76, 0.85);
+      --glass-border: rgba(148, 163, 184, 0.18);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-2: #8b5cf6;
+      --success: #22c55e;
+      --success-bg: rgba(34, 197, 94, 0.14);
+      --error: #ef4444;
+      --error-bg: rgba(239, 68, 68, 0.14);
+      --warn: #f59e0b;
+      --warn-bg: rgba(245, 158, 11, 0.14);
+      --shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    [data-theme="light"] {
+      --bg-grad-1: #eef4ff;
+      --bg-grad-2: #e2e8f0;
+      --bg-accent-1: rgba(14, 165, 233, 0.16);
+      --bg-accent-2: rgba(124, 58, 237, 0.12);
+      --glass-bg: rgba(255, 255, 255, 0.76);
+      --glass-elevated: rgba(255, 255, 255, 0.92);
+      --glass-border: rgba(15, 23, 42, 0.12);
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
+      --accent-2: #7c3aed;
+      --success: #16a34a;
+      --success-bg: rgba(22, 163, 74, 0.12);
+      --error: #dc2626;
+      --error-bg: rgba(220, 38, 38, 0.12);
+      --warn: #d97706;
+      --warn-bg: rgba(217, 119, 6, 0.12);
+      --shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Cairo', sans-serif;
+      color: var(--text-main);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 12% 10%, var(--bg-accent-1), transparent 42%),
+        radial-gradient(circle at 88% 15%, var(--bg-accent-2), transparent 45%),
+        linear-gradient(160deg, var(--bg-grad-1), var(--bg-grad-2));
+      background-attachment: fixed;
+      line-height: 1.6;
+      padding-bottom: 4rem;
+    }
+    .ar { font-family: 'Cairo', 'Inter', sans-serif; direction: rtl; text-align: right; }
+    .container { max-width: 1040px; margin: 0 auto; padding: 1.5rem 1.25rem; }
+    header.glass-header {
+      position: sticky; top: 0.75rem; z-index: 50;
+      background: var(--glass-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--glass-border); border-radius: 20px; padding: 1.1rem 1.4rem;
+      box-shadow: var(--shadow); margin-bottom: 1.25rem;
+    }
+    .header-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
+    .brand h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .badge { font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 999px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; }
+    .subtitle { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; }
+    .header-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+    button {
+      font-family: inherit; cursor: pointer; border: 1px solid var(--glass-border);
+      background: var(--glass-elevated); color: var(--text-main); padding: 0.5rem 0.85rem;
+      border-radius: 12px; font-size: 0.85rem; font-weight: 500;
+      transition: transform 0.14s ease, border-color 0.14s ease, background 0.14s ease;
+    }
+    button:hover { transform: translateY(-1px); border-color: var(--accent); }
+    button.active { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff; border-color: transparent; font-weight: 600; }
+    .stats-bar { margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid var(--glass-border); display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; align-items: center; }
+    .stat-box { background: rgba(148, 163, 184, 0.08); border: 1px solid var(--glass-border); border-radius: 14px; padding: 0.55rem 0.8rem; }
+    .stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); }
+    .stat-value { font-size: 1.05rem; font-weight: 700; margin-top: 0.1rem; }
+    .progress-wrap { grid-column: 1 / -1; }
+    .progress-track { height: 8px; border-radius: 999px; background: rgba(148, 163, 184, 0.18); overflow: hidden; }
+    .progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--success)); transition: width 0.3s ease; }
+    .controls-panel { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 18px; padding: 1rem 1.2rem; margin-bottom: 1.25rem; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 0.85rem; }
+    .filter-row { display: flex; flex-wrap: wrap; gap: 0.45rem; align-items: center; justify-content: space-between; }
+    .tabs { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .search-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+    .search-input { flex: 1 1 240px; padding: 0.6rem 0.9rem; border-radius: 12px; border: 1px solid var(--glass-border); background: var(--glass-elevated); color: var(--text-main); font-size: 0.9rem; font-family: 'Inter', 'Cairo', sans-serif; outline: none; }
+    .search-input:focus { border-color: var(--accent); }
+    .question-card { background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 18px; padding: 1.25rem 1.35rem; margin-bottom: 1rem; box-shadow: var(--shadow); }
+    .q-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.65rem; font-size: 0.78rem; color: var(--text-muted); }
+    .q-num { font-weight: 700; color: var(--accent); background: rgba(56, 189, 248, 0.12); padding: 0.2rem 0.6rem; border-radius: 999px; }
+    .q-text-en { font-size: 1.03rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .q-text-ar { font-size: 0.98rem; color: var(--text-muted); margin-bottom: 0.95rem; padding-right: 0.5rem; border-right: 3px solid var(--accent-2); }
+    .options-list { display: grid; gap: 0.55rem; }
+    .option-btn { width: 100%; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.7rem 0.95rem; border-radius: 12px; background: var(--glass-elevated); border: 1px solid var(--glass-border); font-size: 0.92rem; }
+    .option-btn:hover:not(:disabled) { border-color: var(--accent); transform: translateX(2px); }
+    .option-btn.correct { background: var(--success-bg); border-color: var(--success); color: var(--text-main); font-weight: 600; }
+    .option-btn.wrong { background: var(--error-bg); border-color: var(--error); color: var(--text-main); }
+    .option-btn.dimmed { opacity: 0.6; }
+    .feedback-panel { margin-top: 0.9rem; padding: 0.85rem 1rem; border-radius: 14px; border: 1px solid var(--glass-border); background: rgba(148, 163, 184, 0.08); display: none; }
+    .feedback-panel.show { display: block; }
+    .feedback-status { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.35rem; }
+    .feedback-status.ok { color: var(--success); }
+    .feedback-status.bad { color: var(--error); }
+    .explanation-ar { font-size: 0.92rem; line-height: 1.7; }
+    .hidden { display: none !important; }
+    .empty-state { text-align: center; padding: 2.5rem 1rem; background: var(--glass-bg); border: 1px solid var(--glass-border); border-radius: 18px; color: var(--text-muted); }
+    @media (max-width: 640px) { .container { padding: 0.9rem 0.75rem; } header.glass-header { top: 0.4rem; padding: 0.9rem 1rem; } .question-card { padding: 1rem; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="glass-header">
+      <div class="header-top">
+        <div class="brand"><h1>lamar study <span class="badge">History of Information Technology</span></h1><p class="subtitle">Data Science • Semester 3 • 60 Bilingual Questions (EN + AR) with Explanations</p></div>
+        <div class="header-actions"><button id="toggleArBtn" class="active" type="button">AR Translations: ON</button><button id="toggleExpBtn" class="active" type="button">Explanations: ON</button><button id="themeBtn" type="button">Light Mode</button></div>
+      </div>
+      <div class="stats-bar">
+        <div class="stat-box"><div class="stat-label">Answered</div><div class="stat-value" id="answeredStat">0 / 60</div></div>
+        <div class="stat-box"><div class="stat-label">Correct</div><div class="stat-value" id="correctStat" style="color: var(--success);">0</div></div>
+        <div class="stat-box"><div class="stat-label">Accuracy</div><div class="stat-value" id="accuracyStat">0%</div></div>
+        <div class="stat-box"><div class="stat-label">To Review</div><div class="stat-value" id="reviewStat" style="color: var(--warn);">0</div></div>
+        <div class="progress-wrap"><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div></div>
+      </div>
+    </header>
+    <section class="controls-panel">
+      <div class="filter-row">
+        <div class="tabs" id="sectionTabs">
+          <button class="active" data-section="all" type="button">All Questions (60)</button>
+          <button data-section="it" type="button">1. IT Evolution (1–20)</button>
+          <button data-section="os1" type="button">2. OS Evolution I (21–40)</button>
+          <button data-section="os2" type="button">3. OS Evolution II (41–60)</button>
+        </div>
+        <div style="display:flex;gap:.45rem;flex-wrap:wrap;"><button id="missedOnlyBtn" type="button">Missed Only</button><button id="revealAllBtn" type="button">Reveal All Answers</button><button id="resetBtn" type="button">Reset Progress</button></div>
+      </div>
+      <div class="search-row"><input type="search" id="searchInput" class="search-input" placeholder="Search questions, terms, people, years, or Arabic explanations..." /></div>
+    </section>
+    <main id="questionsContainer"></main>
+    <div id="emptyState" class="empty-state hidden">No questions match your current filter or search query.</div>
+  </div>
+
+  <script>
+    const QUESTIONS = [
+      {id:1,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"What is an ancient counting and calculating tool that is among the earliest in history?",ar:"ما هي أداة العد والحساب القديمة التي تعد من أوائل الأدوات في التاريخ؟",options:[{key:"a",text:"Punched cards"},{key:"b",text:"Abacus"},{key:"c",text:"Analytical engine"},{key:"d",text:"Pascaline"}],answer:"b",answerDisplay:"b) Abacus (المعداد)",expAr:"المعداد هو أقدم أداة حسابية يدوية عرفها الإنسان في الحضارات القديمة لإجراء العمليات الحسابية البسيطة قبل اختراع الآلات الميكانيكية."},
+      {id:2,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"Who invented the Pascaline mechanical calculator in 1642?",ar:"من اخترع الآلة الحاسبة الميكانيكية \"باسكالين\" في عام 1642؟",options:[{key:"a",text:"Gottfried Leibniz"},{key:"b",text:"Charles Babbage"},{key:"c",text:"Alan Turing"},{key:"d",text:"Blaise Pascal"}],answer:"d",answerDisplay:"d) Blaise Pascal (بليز باسكال)",expAr:"اخترع عالم الرياضيات الفرنسي بليز باسكال آلة \"باسكالين\" عام 1642 لمساعدة والده في الحسابات الضريبية، وسميت الآلة باسمه."},
+      {id:3,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"Who is called the \"Father of the Computer\" for designing the Analytical Engine?",ar:"من يلقب بـ \"أبو الحاسوب\" لتصميمه المحرك التحليلي؟",options:[{key:"a",text:"John von Neumann"},{key:"b",text:"Charles Babbage"},{key:"c",text:"Herman Hollerith"},{key:"d",text:"Bill Gates"}],answer:"b",answerDisplay:"b) Charles Babbage (تشارلز بابيج)",expAr:"صمم تشارلز بابيج المحرك التحليلي في القرن التاسع عشر، والذي تضمن المفاهيم الأساسية للحاسوب الحديث (الإدخال، المعالجة، الذاكرة، والإخراج)."},
+      {id:4,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"Who was the first programmer in history to write an algorithm for an analytical engine?",ar:"من كانت أول مبرمجة في التاريخ تكتب خوارزمية للمحرك التحليلي؟",options:[{key:"a",text:"Grace Hopper"},{key:"b",text:"Margaret Hamilton"},{key:"c",text:"Marie Curie"},{key:"d",text:"Ada Lovelace"}],answer:"d",answerDisplay:"d) Ada Lovelace (آدا لوفلايس)",expAr:"كتبت عالمة الرياضيات آدا لوفلايس أول خوارزمية مخصصة للتنفيذ بواسطة المحرك التحليلي لتشارلز بابيج، لذلك تعد أول مبرمجة في التاريخ."},
+      {id:5,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"Who invented the punch card system for processing US census data in 1890?",ar:"من اخترع نظام البطاقات المثقبة لمعالجة بيانات التعداد السكاني الأمريكي عام 1890؟",options:[{key:"a",text:"John Mockley"},{key:"b",text:"Steve Jobs"},{key:"c",text:"Herman Hollerith"},{key:"d",text:"Thomas Watson"}],answer:"c",answerDisplay:"c) Herman Hollerith (هيرمان هوليريث)",expAr:"ابتكر هيرمان هوليريث آلة الجدولة بالبطاقات المثقبة لتسريع فرز بيانات تعداد السكان عام 1890، وأسس لاحقاً الشركة التي أصبحت IBM."},
+      {id:6,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"What was the name of the first general-purpose digital electronic computer (1946)?",ar:"ما اسم أول حاسوب إلكتروني رقمي للأغراض العامة (عام 1946)؟",options:[{key:"a",text:"UNIVAC"},{key:"b",text:"ENIAC"},{key:"c",text:"Apple I"},{key:"d",text:"Altair 8800"}],answer:"b",answerDisplay:"b) ENIAC (إينياك)",expAr:"حاسوب ENIAC عام 1946 هو أول حاسوب إلكتروني رقمي قابل لإعادة البرمجة لأغراض متعددة، وكان يعتمد على الصمامات المفرغة."},
+      {id:7,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"What was the primary technology used in the first generation of computers?",ar:"ما هي التقنية الأساسية المستخدمة في الجيل الأول من الحواسيب؟",options:[{key:"a",text:"Transistors"},{key:"b",text:"Vacuum valves"},{key:"c",text:"Integrated circuits"},{key:"d",text:"Microprocessors"}],answer:"b",answerDisplay:"b) Vacuum valves (الصمامات المفرغة)",expAr:"اعتمدت حواسيب الجيل الأول (1945-1955) على الصمامات المفرغة كعناصر إلكترونية أساسية، مما جعلها ضخمة وتستهلك طاقة عالية."},
+      {id:8,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"What technology characterized the second generation of computers?",ar:"ما هي التقنية التي ميزت الجيل الثاني من الحواسيب؟",options:[{key:"a",text:"Vacuum tubes"},{key:"b",text:"Artificial intelligence"},{key:"c",text:"Cloud computing"},{key:"d",text:"Transistors"}],answer:"d",answerDisplay:"d) Transistors (الترانزستورات)",expAr:"حل الترانزستور محل الصمامات المفرغة في الجيل الثاني (1955-1965)، مما جعل الحواسيب أصغر حجماً وأسرع وأقل حرارة."},
+      {id:9,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"What technology characterized the third generation of computers?",ar:"ما هي التقنية التي ميزت الجيل الثالث من الحواسيب؟",options:[{key:"a",text:"Single transistor"},{key:"b",text:"Microprocessors"},{key:"c",text:"Vacuum tubes"},{key:"d",text:"Integrated circuits (ICs)"}],answer:"d",answerDisplay:"d) Integrated circuits (ICs) (الدوائر المتكاملة)",expAr:"تميز الجيل الثالث باستخدام الدوائر المتكاملة التي تضم آلاف الترانزستورات معاً، مما زاد الكفاءة وخفض التكلفة."},
+      {id:10,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"What technology characterized the fourth generation of computers?",ar:"ما هي التقنية التي ميزت الجيل الرابع من الحواسيب؟",options:[{key:"a",text:"Microprocessors"},{key:"b",text:"Quantum computing"},{key:"c",text:"Punched cards"},{key:"d",text:"Vacuum valves"}],answer:"a",answerDisplay:"a) Microprocessors (المعالجات الدقيقة)",expAr:"اعتمد الجيل الرابع على المعالجات الدقيقة ودمج وحدة المعالجة المركزية في شريحة واحدة، مما أدى لظهور الحواسيب الشخصية."},
+      {id:11,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"What was the name of the first commercial microprocessor produced by Intel in 1971?",ar:"ما اسم أول معالج دقيق تجاري أنتجته شركة إنتل في عام 1971؟",options:[{key:"a",text:"Pentium"},{key:"b",text:"Core i7"},{key:"c",text:"Intel 8086"},{key:"d",text:"Intel 4004"}],answer:"d",answerDisplay:"d) Intel 4004 (معالج إنتل 4004)",expAr:"أطلقت Intel معالج 4004 عام 1971 كأول معالج دقيق تجاري متكامل على شريحة واحدة."},
+      {id:12,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"What is the name of the network that formed the core of the internet and began in 1969?",ar:"ما اسم الشبكة التي شكلت نواة الإنترنت وبدأت في عام 1969؟",options:[{key:"a",text:"Bluetooth"},{key:"b",text:"Ethernet"},{key:"c",text:"WWW"},{key:"d",text:"ARPANET"}],answer:"d",answerDisplay:"d) ARPANET (شبكة أربانت)",expAr:"أنشئت شبكة ARPANET عام 1969 لربط الجامعات ومراكز الأبحاث الأمريكية، وتعد الأساس التاريخي لشبكة الإنترنت الحالية."},
+      {id:13,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"Who invented the World Wide Web (WWW) in 1989?",ar:"من اخترع الشبكة العنكبوتية العالمية (WWW) في عام 1989؟",options:[{key:"a",text:"Larry Page"},{key:"b",text:"Tim Berners-Lee"},{key:"c",text:"Mark Zuckerberg"},{key:"d",text:"Vint Cerf"}],answer:"b",answerDisplay:"b) Tim Berners-Lee (تيم بيرنرز لي)",expAr:"اخترع تيم بيرنرز لي نظام الويب ولغة HTML وبروتوكول HTTP عام 1989 أثناء عمله في مختبر CERN."},
+      {id:14,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"In what year did IBM launch its personal computer, the IBM PC?",ar:"في أي عام أطلقت شركة IBM حاسوبها الشخصي (IBM PC)؟",options:[{key:"a",text:"1981"},{key:"b",text:"2001"},{key:"c",text:"1971"},{key:"d",text:"1991"}],answer:"a",answerDisplay:"a) 1981",expAr:"أطلقت IBM جهاز IBM PC في عام 1981 مزوداً بنظام MS-DOS، مما أحدث انتشاراً واسعاً للحواسيب الشخصية."},
+      {id:15,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"Who founded Microsoft in 1975?",ar:"من أسس شركة مايكروسوفت في عام 1975؟",options:[{key:"a",text:"Steve Jobs and Steve Wozniak"},{key:"b",text:"Bill Gates and Paul Allen"},{key:"c",text:"Jeff Bezos and Elon Musk"},{key:"d",text:"Larry Page and Sergey Brin"}],answer:"b",answerDisplay:"b) Bill Gates and Paul Allen (بيل جيتس وبول ألين)",expAr:"أسس بيل جيتس وبول ألين شركة مايكروسوفت عام 1975 لتطوير البرمجيات للحواسيب المصغرة."},
+      {id:16,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"Who sent the first email over the internet in 1971 and used the @ symbol?",ar:"من أرسل أول بريد إلكتروني عبر الشبكة عام 1971 واستخدم رمز @؟",options:[{key:"a",text:"Ray Tomlinson"},{key:"b",text:"Tim Berners-Lee"},{key:"c",text:"Dennis Ritchie"},{key:"d",text:"Bill Gates"}],answer:"a",answerDisplay:"a) Ray Tomlinson (راي توملينسون)",expAr:"أرسل راي توملينسون أول رسالة بريد إلكتروني عام 1971 واستخدم رمز @ للفصل بين اسم المستخدم واسم الجهاز."},
+      {id:17,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"In what year was Google founded?",ar:"في أي عام تأسست شركة جوجل؟",options:[{key:"a",text:"1985"},{key:"b",text:"2004"},{key:"c",text:"1998"},{key:"d",text:"1992"}],answer:"c",answerDisplay:"c) 1998",expAr:"تأسست Google رسمياً في سبتمبر 1998 على يد لاري بيج وسيرجي برين."},
+      {id:18,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"In what year did Apple introduce the first iPhone?",ar:"في أي عام قدمت Apple أول هاتف آيفون؟",options:[{key:"a",text:"2007"},{key:"b",text:"2003"},{key:"c",text:"2010"},{key:"d",text:"2012"}],answer:"a",answerDisplay:"a) 2007",expAr:"كشف ستيف جوبز عن أول iPhone في عام 2007، ليغير تصميم الهواتف الذكية."},
+      {id:19,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"Who developed the theoretical concept of the computer through the \"Turing machine\" in 1936?",ar:"من طور المفهوم النظري للحاسوب من خلال \"آلة تورينج\" عام 1936؟",options:[{key:"a",text:"Alan Turing"},{key:"b",text:"Claude Shannon"},{key:"c",text:"Blaise Pascal"},{key:"d",text:"John McCarthy"}],answer:"a",answerDisplay:"a) Alan Turing (آلان تورينج)",expAr:"قدم آلان تورينج نموذج آلة تورينج عام 1936 كأساس نظري للخوارزميات والحوسبة الحديثة."},
+      {id:20,section:"it",sectionLabel:"IT Evolution (Q1–Q20)",en:"What concept underpins the fifth generation of computers?",ar:"ما هو المفهوم الذي يرتكز عليه الجيل الخامس من الحواسيب؟",options:[{key:"a",text:"Punched cards"},{key:"b",text:"Vacuum valves"},{key:"c",text:"Artificial intelligence"},{key:"d",text:"Small integrated circuits only"}],answer:"c",answerDisplay:"c) Artificial intelligence (الذكاء الاصطناعي)",expAr:"يركز الجيل الخامس على الذكاء الاصطناعي والتعلم الآلي ومعالجة اللغات الطبيعية والحوسبة المتوازية."},
+
+      {id:21,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which statement best describes the first generation of computing? (1945-55)",ar:"أي عبارة تصف الجيل الأول من الحوسبة بشكل أفضل؟ (1945-1955)",options:[{key:"a",text:"Programs ran under a batch monitor"},{key:"b",text:"There was no operating system; programmers loaded machine-language programs directly"},{key:"c",text:"Users shared the machine through time-sharing terminals"},{key:"d",text:"Graphical interfaces managed the screen"}],answer:"b",answerDisplay:"B) No operating system; direct loading of machine-language programs",expAr:"في الجيل الأول لم تكن أنظمة التشغيل موجودة بعد، وكان المبرمجون يتعاملون مباشرة مع الجهاز."},
+      {id:22,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which hardware advance defines the second generation of computers? (1955-65)",ar:"ما التطور الذي يميز الجيل الثاني؟ (1955-1965)",options:[{key:"a",text:"Vacuum tubes"},{key:"b",text:"Transistors"},{key:"c",text:"Microprocessors"},{key:"d",text:"Optical discs"}],answer:"b",answerDisplay:"B) Transistors",expAr:"استبدلت الترانزستورات الصمامات المفرغة في الجيل الثاني، مما جعل الأجهزة أصغر وأكثر موثوقية."},
+      {id:23,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"What is a batch processing system?",ar:"ما هو نظام المعالجة بالدفعات؟",options:[{key:"a",text:"Several users type commands at the same time"},{key:"b",text:"Similar jobs are grouped and run one after another with no user interaction"},{key:"c",text:"Every job must finish within a fixed deadline"},{key:"d",text:"Jobs are spread across many computers"}],answer:"b",answerDisplay:"B) Similar jobs grouped and run sequentially without interaction",expAr:"تجمع المهام المتشابهة وتنفيذها بالتسلسل لتقليل وقت خمول المعالج."},
+      {id:24,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which early operating system was developed by General Motors for the IBM 701 in 1956?",ar:"ما نظام التشغيل المبكر الذي طورته جنرال موتورز لحاسوب IBM 701 عام 1956؟",options:[{key:"a",text:"GM-NAA I/O"},{key:"b",text:"UNIX"},{key:"c",text:"CP/M"},{key:"d",text:"OS/360"}],answer:"a",answerDisplay:"A) GM-NAA I/O",expAr:"يُعد GM-NAA I/O من أوائل أنظمة التشغيل، وطُور لأتمتة تحميل وتنفيذ المهام تلقائياً."},
+      {id:25,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"What was the purpose of spooling?",ar:"ما هو الغرض من تقنية Spooling؟",options:[{key:"a",text:"To encrypt files"},{key:"b",text:"To overlap slow I/O with CPU work using disk or tape buffers"},{key:"c",text:"To schedule real-time tasks"},{key:"d",text:"To display windows"}],answer:"b",answerDisplay:"B) Overlap slow I/O with CPU work",expAr:"تخزن Spooling البيانات مؤقتاً على القرص أو الشريط حتى يستمر المعالج في تنفيذ مهام أخرى."},
+      {id:26,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which technology is associated with the third generation of computers? (1965-80)",ar:"ما التقنية المرتبطة بالجيل الثالث؟ (1965-1980)",options:[{key:"a",text:"Integrated circuits"},{key:"b",text:"Vacuum tubes"},{key:"c",text:"Quantum bits"},{key:"d",text:"Large language models"}],answer:"a",answerDisplay:"A) Integrated circuits",expAr:"جمعت الدوائر المتكاملة عدداً كبيراً من الترانزستورات على شريحة واحدة."},
+      {id:27,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"What is the main purpose of multiprogramming?",ar:"ما الهدف الرئيسي لتعدد البرمجة؟",options:[{key:"a",text:"To keep the CPU busy by running another job while one waits for I/O"},{key:"b",text:"To allow only one job in memory"},{key:"c",text:"To remove the need for memory"},{key:"d",text:"To replace the file system"}],answer:"a",answerDisplay:"A) Keep the CPU busy by switching jobs",expAr:"يحتفظ تعدد البرمجة بعدة مهام في الذاكرة وينتقل للآخر عندما تنتظر مهمة الإدخال والإخراج."},
+      {id:28,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"IBM's OS/360 was designed for...",ar:"صُمم نظام OS/360 لشركة IBM ليعمل لـ...",options:[{key:"a",text:"A single personal computer"},{key:"b",text:"A family of compatible computers of different sizes"},{key:"c",text:"Mobile phones"},{key:"d",text:"Embedded sensors only"}],answer:"b",answerDisplay:"B) A family of compatible computers",expAr:"صمم OS/360 لسلسلة System/360 وتوافر البرامج على أجهزة بمختلف الأحجام."},
+      {id:29,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which early time-sharing system was demonstrated at MIT in 1961?",ar:"ما نظام المشاركة الزمنية المبكر الذي عُرض في MIT عام 1961؟",options:[{key:"a",text:"CTSS"},{key:"b",text:"MS-DOS"},{key:"c",text:"Android"},{key:"d",text:"Windows 95"}],answer:"a",answerDisplay:"A) CTSS",expAr:"نظام CTSS أتاح لعدة مستخدمين التفاعل مع حاسوب واحد عبر طرفيات منفصلة."},
+      {id:30,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"MULTICS is best known for...",ar:"يُعرف نظام MULTICS بأنه...",options:[{key:"a",text:"The first mobile OS"},{key:"b",text:"Introducing ideas that strongly influenced UNIX"},{key:"c",text:"Running only on microcomputers"},{key:"d",text:"The first graphical OS"}],answer:"b",answerDisplay:"B) Influencing UNIX",expAr:"أثر مشروع MULTICS بقوة في مفاهيم الأمان وتنظيم الملفات التي ظهرت في UNIX."},
+      {id:31,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Who developed UNIX at Bell Labs around 1969?",ar:"من طور UNIX في مختبرات بيل حوالي عام 1969؟",options:[{key:"a",text:"Ken Thompson and Dennis Ritchie"},{key:"b",text:"Bill Gates and Paul Allen"},{key:"c",text:"Linus Torvalds and Richard Stallman"},{key:"d",text:"Steve Jobs and Steve Wozniak"}],answer:"a",answerDisplay:"A) Ken Thompson and Dennis Ritchie",expAr:"طوّر كين تومسون ودينيس ريتشي نظام UNIX في مختبرات بيل عام 1969."},
+      {id:32,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"In 1973 UNIX was rewritten in which language?",ar:"في عام 1973 أعيدت كتابة UNIX بأي لغة؟",options:[{key:"a",text:"C"},{key:"b",text:"COBOL"},{key:"c",text:"Java"},{key:"d",text:"Python"}],answer:"a",answerDisplay:"A) C",expAr:"أعيدت كتابة UNIX بلغة C مما جعله أسهل في النقل والتشغيل على أجهزة مختلفة."},
+      {id:33,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which technology led to the fourth generation and the personal computer?",ar:"ما التقنية التي أدت إلى الجيل الرابع والحاسوب الشخصي؟",options:[{key:"a",text:"Vacuum tubes"},{key:"b",text:"Microprocessors and LSI/VLSI chips"},{key:"c",text:"Punched cards"},{key:"d",text:"Magnetic drums"}],answer:"b",answerDisplay:"B) Microprocessors and LSI/VLSI chips",expAr:"مكنت المعالجات الدقيقة وشرائح التكامل واسع النطاق من تصغير الحواسيب وخفض تكلفتها."},
+      {id:34,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"CP/M was created by...",ar:"من ابتكر نظام CP/M؟",options:[{key:"a",text:"Gary Kildall"},{key:"b",text:"Tim Berners-Lee"},{key:"c",text:"Alan Turing"},{key:"d",text:"Charles Babbage"}],answer:"a",answerDisplay:"A) Gary Kildall",expAr:"ابتكر غاري كيلدال نظام CP/M للحواسيب المصغرة ذات معالجات 8 بت."},
+      {id:35,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"MS-DOS became dominant after being supplied with which computer in 1981?",ar:"أصبح MS-DOS مهيمناً بعد تزويده مع أي حاسوب عام 1981؟",options:[{key:"a",text:"Apple Macintosh"},{key:"b",text:"IBM PC"},{key:"c",text:"Commodore 64"},{key:"d",text:"Xerox Alto"}],answer:"b",answerDisplay:"B) IBM PC",expAr:"زوّد IBM PC بنظام MS-DOS عام 1981، مما ساعد انتشار النظام."},
+      {id:36,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which research center built the Alto, an early GUI computer?",ar:"أي مركز أبحاث بنى حاسوب Alto بواجهة رسومية مبكرة؟",options:[{key:"a",text:"Xerox PARC"},{key:"b",text:"CERN"},{key:"c",text:"Bell Labs"},{key:"d",text:"NASA"}],answer:"a",answerDisplay:"A) Xerox PARC",expAr:"طور Xerox PARC حاسوب Alto الذي استخدم النوافذ والأيقونات والفأرة قبل انتشار أنظمة GUI."},
+      {id:37,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which Windows release introduced the Start menu and taskbar in 1995?",ar:"أي إصدار من ويندوز قدم قائمة Start وشريط المهام عام 1995؟",options:[{key:"a",text:"Windows 1.0"},{key:"b",text:"Windows 3.0"},{key:"c",text:"Windows 95"},{key:"d",text:"Windows XP"}],answer:"c",answerDisplay:"C) Windows 95",expAr:"قدم Windows 95 قائمة Start وشريط المهام وسهّل استخدام واجهة الرسومية للمستخدمين."},
+      {id:38,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Linux was first released in 1991 by...",ar:"تم إصدار Linux لأول مرة عام 1991 بواسطة...",options:[{key:"a",text:"Linus Torvalds"},{key:"b",text:"Dennis Ritchie"},{key:"c",text:"Bill Joy"},{key:"d",text:"Andrew Tanenbaum"}],answer:"a",answerDisplay:"A) Linus Torvalds",expAr:"أطلق لينوس تورفالدس نواة Linux مفتوحة المصدر في عام 1991."},
+      {id:39,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which OS must guarantee a response within a fixed time limit?",ar:"أي نظام تشغيل يجب أن يضمن الاستجابة بحد زمني ثابت؟",options:[{key:"a",text:"Batch OS"},{key:"b",text:"Real-time OS (RTOS)"},{key:"c",text:"Single-user OS"},{key:"d",text:"Time-sharing OS"}],answer:"b",answerDisplay:"B) Real-time OS (RTOS)",expAr:"يستخدم RTOS في التطبيقات الحرجة التي لا تحتمل التأخير الزمني مثل الأجهزة الطبية وأنظمة المركبات."},
+      {id:40,section:"os1",sectionLabel:"OS Evolution I (Q21–Q40)",en:"Which kernel is the basis of Android?",ar:"ما النواة التي يقوم عليها نظام Android؟",options:[{key:"a",text:"Windows NT"},{key:"b",text:"Linux"},{key:"c",text:"MS-DOS"},{key:"d",text:"CP/M"}],answer:"b",answerDisplay:"B) Linux",expAr:"يعتمد Android على نواة Linux معدلة لإدارة عتاد الهواتف الذكية."},
+
+      {id:41,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Which hardware technology defined first-generation OSes (1945-1955)?",ar:"ما تقنية العتاد التي ميزت الجيل الأول من أنظمة التشغيل؟",options:[{key:"a",text:"Transistors"},{key:"b",text:"Vacuum tubes"},{key:"c",text:"Integrated circuits"},{key:"d",text:"Microprocessors"}],answer:"b",answerDisplay:"B) Vacuum Tubes",expAr:"بنيت حواسيب ا��جيل الأول باستخدام الصمامات المفرغة قبل أنظمة التشغيل الحديثة."},
+      {id:42,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"How were programs executed in the first generation?",ar:"كيف كانت تنفذ البرامج في الجيل الأول؟",options:[{key:"a",text:"Through GUIs"},{key:"b",text:"Using batch systems"},{key:"c",text:"By manually configuring plugboards and switches"},{key:"d",text:"Through cloud environments"}],answer:"c",answerDisplay:"C) By manually configuring plugboards and switches",expAr:"كان المبرمجون يهيئون اللوحات والأسلاك والمفاتيح والبطاقات مباشرة لتشغيل البرامج."},
+      {id:43,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"What major hardware breakthrough marked the second OS generation?",ar:"ما الاختراق الكبير الذي ميز الجيل الثاني؟",options:[{key:"a",text:"Vacuum tubes"},{key:"b",text:"Transistors"},{key:"c",text:"Microprocessors"},{key:"d",text:"VLSI circuits"}],answer:"b",answerDisplay:"B) Transistors",expAr:"جعلت الترانزستورات الحواسيب أصغر وأكثر موثوقية وأدت لظهور أنظمة الدفعات."},
+      {id:44,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"During which OS generation was batch processing introduced?",ar:"خلال أي جيل قدمت المعالجة بالدفعات؟",options:[{key:"a",text:"Zeroth"},{key:"b",text:"First"},{key:"c",text:"Second"},{key:"d",text:"Third"}],answer:"c",answerDisplay:"C) Second Generation",expAr:"طورت أنظمة المعالجة بالدفعات خلال الجيل الثاني لتجميع المهام وتنفيذها بالتسلسل."},
+      {id:45,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"What was a limitation of early batch processing?",ar:"ما قيد أنظمة المعالجة بالدفعات المبكرة؟",options:[{key:"a",text:"Inability to process numbers"},{key:"b",text:"No interactive user intervention during execution"},{key:"c",text:"Need for high-speed internet"},{key:"d",text:"Incompatibility with magnetic tapes"}],answer:"b",answerDisplay:"B) No interactive user intervention",expAr:"لا يستطيع المستخدم التفاعل مع البرنامج أو تعديله حتى ينتهي التنفيذ بالكامل."},
+      {id:46,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Integrated circuits enabled the development of which OS generation?",ar:"مكنت الدوائر المتكاملة من تطوير أي جيل؟",options:[{key:"a",text:"First"},{key:"b",text:"Second"},{key:"c",text:"Third"},{key:"d",text:"Fourth"}],answer:"c",answerDisplay:"C) Third Generation",expAr:"تميز الجيل الثالث (1965-1980) بالاعتماد واسعاً على الدوائر المتكاملة."},
+      {id:47,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Which feature allowed multiple jobs in memory to keep the CPU busy?",ar:"ما الميزة التي سمحت بوجود مهام متعددة في الذاكرة لإبقاء المعالج مشغولاً؟",options:[{key:"a",text:"Single-user execution"},{key:"b",text:"Spooling and multiprogramming"},{key:"c",text:"Distributed computing"},{key:"d",text:"CLI-only mode"}],answer:"b",answerDisplay:"B) Spooling and multiprogramming",expAr:"يضع تعدد البرمجة مهاماً متعددة في الذاكرة وينتقل بينها لاستخدام المعالج بكفاءة."},
+      {id:48,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Which technique allowed interactive users to share the CPU through rapid switching?",ar:"ما التقنية التي سمحت للمستخدمين بمشاركة المعالج بالتبديل السريع؟",options:[{key:"a",text:"Timesharing"},{key:"b",text:"Real-time batching"},{key:"c",text:"Direct switching"},{key:"d",text:"Uniprocessing"}],answer:"a",answerDisplay:"A) Timesharing",expAr:"تعطي المشاركة الزمنية كل مستخدم شريحة زمنية صغيرة بالتناوب السريع."},
+      {id:49,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Which famous OS was created at Bell Labs in 1969?",ar:"ما نظام التشغيل الشهير الذي أنشئ في مختبرات بيل عام 1969؟",options:[{key:"a",text:"MS-DOS"},{key:"b",text:"Unix"},{key:"c",text:"Windows 95"},{key:"d",text:"CP/M"}],answer:"b",answerDisplay:"B) Unix",expAr:"أنشئ Unix عام 1969 وأثر بشدة في تصميم أنظمة التشغيل الحديثة."},
+      {id:50,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Fourth-generation OSes were primarily driven by...",ar:"مدت أنظمة الجيل الرابع بأي تقنية؟",options:[{key:"a",text:"Vacuum tubes"},{key:"b",text:"Magnetic cores"},{key:"c",text:"VLSI/microprocessor-based PCs"},{key:"d",text:"Relay switches"}],answer:"c",answerDisplay:"C) VLSI/microprocessor-based PCs",expAr:"أدى تطور VLSI والمعالجات الدقيقة إلى انتشار الحواسيب الشخصية وتطور أنظمة تشغيلها."},
+      {id:51,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Which early microcomputer OS did Gary Kildall create?",ar:"أي نظام تشغيل للحواسيب المصغرة ابتكره غاري كيلدال؟",options:[{key:"a",text:"CP/M"},{key:"b",text:"OS/2"},{key:"c",text:"MULTICS"},{key:"d",text:"UNIX"}],answer:"a",answerDisplay:"A) CP/M",expAr:"كان CP/M أحد أنظمة التشغيل الأكثر انتشاراً لحواسيب 8-بت قبل MS-DOS."},
+      {id:52,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"What interface was introduced to nontechnical users in the fourth generation?",ar:"ما الواجهة التي قدمت للمستخدمين غير التقنيين في الجيل الرابع؟",options:[{key:"a",text:"Punch cards"},{key:"b",text:"Graphical User Interface (GUI)"},{key:"c",text:"Toggle switches"},{key:"d",text:"Assembly prompts"}],answer:"b",answerDisplay:"B) Graphical User Interface (GUI)",expAr:"سهّلت GUI استخدام الحاسوب عبر النوافذ والأيقونات والفأرة بدلاً من الأوامر النصية."},
+      {id:53,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"What is spooling?",ar:"ما هو Spooling؟",options:[{key:"a",text:"Connecting CPUs with wires"},{key:"b",text:"Storing I/O job data on disk while the CPU executes other jobs"},{key:"c",text:"Manufacturing microprocessors"},{key:"d",text:"Converting code to assembly"}],answer:"b",answerDisplay:"B) Storing I/O data on disk while executing other jobs",expAr:"تخزن Spooling بيانات الإدخال والإخراج مؤقتاً حتى يستمر المعالج في مهام أخرى."},
+      {id:54,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Which joint project laid the groundwork for Unix?",ar:"أي مشروع مشترك مهّد الطريق لنظام Unix؟",options:[{key:"a",text:"MULTICS"},{key:"b",text:"Linux"},{key:"c",text:"DOS"},{key:"d",text:"VMS"}],answer:"a",answerDisplay:"A) MULTICS",expAr:"قدم مشروع MULTICS مفاهيم أساسية استند إليها Unix في تصميم أنظمة التشغيل."},
+      {id:55,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"What characterizes fifth-generation computing environments?",ar:"ما الذي يميز بيئات حوسبة الجيل الخامس؟",options:[{key:"a",text:"A return to vacuum tubes"},{key:"b",text:"Mobile OS, cloud, parallel processing, and AI integration"},{key:"c",text:"CLI-only single-user systems"},{key:"d",text:"Elimination of hardware abstraction"}],answer:"b",answerDisplay:"B) Mobile OS, cloud, parallel processing, and AI",expAr:"تركز أنظمة الجيل الخامس على الهواتف والحوسبة السحابية والمعالجات المتعددة والذكاء الاصطناعي."},
+      {id:56,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"What is the main advantage of virtual memory?",ar:"ما الميزة الأساسية للذاكرة الافتراضية؟",options:[{key:"a",text:"Eliminates physical RAM"},{key:"b",text:"Runs programs larger than physical memory"},{key:"c",text:"Speeds disk rotation"},{key:"d",text:"Prevents all bugs"}],answer:"b",answerDisplay:"B) Execute programs larger than physical memory",expAr:"تسمح الذاكرة الافتراضية بتشغيل أجزاء من البرامج تفوق سعة RAM الفعلية باستخدام القرص كذاكرة ثانوية."},
+      {id:57,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Who created the Linux kernel in 1991?",ar:"من ابتكر نواة Linux عام 1991؟",options:[{key:"a",text:"Steve Jobs"},{key:"b",text:"Bill Gates"},{key:"c",text:"Linus Torvalds"},{key:"d",text:"Richard Stallman"}],answer:"c",answerDisplay:"C) Linus Torvalds",expAr:"طوّر لينوس تورفالدس نواة Linux الأصلية عام 1991."},
+      {id:58,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"Which OS is optimized for strict execution time constraints?",ar:"أي نوع نظام تشغيل يحسن القيود الزمنية الصارمة؟",options:[{key:"a",text:"Batch OS"},{key:"b",text:"Real-Time OS (RTOS)"},{key:"c",text:"Network OS"},{key:"d",text:"Distributed OS"}],answer:"b",answerDisplay:"B) Real-Time OS (RTOS)",expAr:"يضمن RTOS الاستجابة خلال حدود زمنية دقيقة في الأنظمة الطبية والصناعية."},
+      {id:59,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"What distinguishes 64-bit OSes from older 32-bit OSes?",ar:"ما الذي يميز أنظمة 64-بت عن أنظمة 32-بت؟",options:[{key:"a",text:"No GUI"},{key:"b",text:"Ability to address much larger RAM"},{key:"c",text:"No network support"},{key:"d",text:"Exclusive single-core support"}],answer:"b",answerDisplay:"B) Ability to address much larger RAM",expAr:"تتجاوز معمارية 64-بت حد الـ 4 جيجابايت في أنظمة 32-بت وتدعم ذاكرة أكبر."},
+      {id:60,section:"os2",sectionLabel:"OS Evolution II (Q41–Q60)",en:"What is a key characteristic of distributed operating systems?",ar:"ما السمة الرئيسية لأنظمة التشغيل الموزعة؟",options:[{key:"a",text:"Manage independent computers as one unified system"},{key:"b",text:"Run on one motherboard only"},{key:"c",text:"Use punch cards"},{key:"d",text:"No multithreading support"}],answer:"a",answerDisplay:"A) Manage independent computers as one unified system",expAr:"تربط أنظمة التشغيل الموزعة موارد عدة أجهزة متصلة بالشبكة وتديرها معاً كحاسوب واحد للمستخدم."}
+    ];
+
+    const STORAGE_KEY = "uni301_hit_study_progress_v1";
+    let state = { answers:{}, section:"all", missedOnly:false, search:"", showAr:true, showExp:true, theme:"dark" };
+
+    function loadState(){ try { const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)); if(saved) state={...state,...saved}; } catch(e){} applyTheme(); syncToggleButtons(); }
+    function saveState(){ try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){} }
+    function applyTheme(){ document.documentElement.setAttribute("data-theme",state.theme); document.getElementById("themeBtn").textContent=state.theme==="dark"?"Light Mode":"Dark Mode"; }
+    function syncToggleButtons(){ const ar=document.getElementById("toggleArBtn"), ex=document.getElementById("toggleExpBtn"); ar.textContent=state.showAr?"AR Translations: ON":"AR Translations: OFF"; ar.classList.toggle("active",state.showAr); ex.textContent=state.showExp?"Explanations: ON":"Explanations: OFF"; ex.classList.toggle("active",state.showExp); }
+    function updateStats(){ const entries=Object.values(state.answers), answered=entries.length, correct=entries.filter(a=>a.isCorrect).length, missed=entries.filter(a=>!a.isCorrect).length, accuracy=answered?Math.round(correct/answered*100):0; document.getElementById("answeredStat").textContent=`${answered} / 60`; document.getElementById("correctStat").textContent=correct; document.getElementById("accuracyStat").textContent=`${accuracy}%`; document.getElementById("reviewStat").textContent=missed; document.getElementById("progressFill").style.width=`${Math.round(answered/60*100)}%`; }
+    function escapeHtml(value){ return String(value).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c])); }
+
+    function renderQuestions(){
+      const container=document.getElementById("questionsContainer"), empty=document.getElementById("emptyState"), query=state.search.trim().toLowerCase();
+      const filtered=QUESTIONS.filter(q=>{
+        if(state.section!=="all"&&q.section!==state.section)return false;
+        const ans=state.answers[q.id]; if(state.missedOnly&&(!ans||ans.isCorrect))return false;
+        if(query){ const hay=[q.id,q.en,q.ar,q.expAr,q.answerDisplay,...q.options.map(o=>o.text)].join(" ").toLowerCase(); if(!hay.includes(query))return false; }
+        return true;
+      });
+      container.innerHTML="";
+      if(!filtered.length){empty.classList.remove("hidden");return;} empty.classList.add("hidden");
+      filtered.forEach(q=>{
+        const ans=state.answers[q.id], card=document.createElement("article"); card.className="question-card";
+        const options=q.options.map(opt=>{ let cls="option-btn",icon=""; if(ans){if(opt.key===q.answer){cls+= " correct";icon="✓";}else if(opt.key===ans.chosenKey&&!ans.isCorrect){cls+= " wrong";icon="✕";}else cls+= " dimmed";} return `<button type="button" class="${cls}" data-key="${opt.key}" ${ans?"disabled":""}><span><strong>${opt.key.toUpperCase()})</strong> ${escapeHtml(opt.text)}</span><span>${icon}</span></button>`; }).join("");
+        let status=""; if(ans){ status=ans.revealedOnly?`<div class="feedback-status" style="color:var(--accent)">Correct Answer: ${escapeHtml(q.answerDisplay)}</div>`:ans.isCorrect?`<div class="feedback-status ok">Correct! • ${escapeHtml(q.answerDisplay)}</div>`:`<div class="feedback-status bad">Incorrect — Correct Answer: ${escapeHtml(q.answerDisplay)}</div>`; }
+        card.innerHTML=`<div class="q-meta"><span class="q-num">Question ${q.id}</span><span>${escapeHtml(q.sectionLabel)}</span></div><div class="q-text-en">${escapeHtml(q.en)}</div><div class="q-text-ar ar ${state.showAr?"":"hidden"}">${escapeHtml(q.ar)}</div><div class="options-list">${options}</div><div class="feedback-panel ${ans?"show":""}">${status}<div class="explanation-ar ar ${state.showExp?"":"hidden"}"><strong>الشرح:</strong> ${escapeHtml(q.expAr)}</div></div>`;
+        card.querySelectorAll(".option-btn").forEach(btn=>btn.addEventListener("click",()=>{const chosen=btn.dataset.key; state.answers[q.id]={chosenKey:chosen,isCorrect:chosen===q.answer,revealedOnly:false}; saveState(); updateStats(); renderQuestions();}));
+        container.appendChild(card);
+      });
+    }
+
+    document.getElementById("sectionTabs").addEventListener("click",e=>{const btn=e.target.closest("button[data-section]");if(!btn)return;state.section=btn.dataset.section;document.querySelectorAll("#sectionTabs button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderQuestions();});
+    document.getElementById("missedOnlyBtn").addEventListener("click",function(){state.missedOnly=!state.missedOnly;this.classList.toggle("active",state.missedOnly);renderQuestions();});
+    document.getElementById("revealAllBtn").addEventListener("click",()=>{QUESTIONS.forEach(q=>{if(!state.answers[q.id])state.answers[q.id]={chosenKey:null,isCorrect:false,revealedOnly:true};});saveState();updateStats();renderQuestions();});
+    document.getElementById("resetBtn").addEventListener("click",()=>{state.answers={};state.missedOnly=false;document.getElementById("missedOnlyBtn").classList.remove("active");saveState();updateStats();renderQuestions();});
+    document.getElementById("searchInput").addEventListener("input",e=>{state.search=e.target.value;renderQuestions();});
+    document.getElementById("toggleArBtn").addEventListener("click",()=>{state.showAr=!state.showAr;syncToggleButtons();saveState();renderQuestions();});
+    document.getElementById("toggleExpBtn").addEventListener("click",()=>{state.showExp=!state.showExp;syncToggleButtons();saveState();renderQuestions();});
+    document.getElementById("themeBtn").addEventListener("click",()=>{state.theme=state.theme==="dark"?"light":"dark";applyTheme();saveState();});
+
+    loadState(); updateStats(); renderQuestions();
+  </script>
+</body>
+</html>
